@@ -1,0 +1,270 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #ffffff;
+  --surface: #f7f8fa;
+  --border: #e8eaed;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+  --accent: #4f46e5;
+  --accent-light: #eef2ff;
+  --accent-hover: #4338ca;
+  --danger: #ef4444;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-size: 13px;
+  background: var(--bg);
+  color: var(--text-primary);
+  width: 360px;
+  min-height: 100px;
+  line-height: 1.4;
+}
+
+.app { display: flex; flex-direction: column; }
+
+/* ── Header ─────────────────────────────────────── */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-left { display: flex; align-items: center; gap: 8px; }
+
+.logo-icon {
+  width: 20px; height: 20px;
+  color: var(--accent);
+}
+
+.app-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--text-primary);
+}
+
+/* ── Toggle ─────────────────────────────────────── */
+.toggle { display: inline-flex; align-items: center; cursor: pointer; }
+.toggle input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+.toggle-track {
+  width: 36px; height: 20px;
+  background: var(--border);
+  border-radius: 10px;
+  transition: background .15s;
+  position: relative;
+}
+
+.toggle input:checked + .toggle-track { background: var(--accent); }
+
+.toggle-thumb {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 16px; height: 16px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: transform .15s;
+}
+
+.toggle input:checked + .toggle-track .toggle-thumb { transform: translateX(16px); }
+
+/* ── Main content ────────────────────────────────── */
+.main-content {
+  padding: 4px 0 8px;
+  transition: opacity .15s;
+}
+
+.main-content.disabled-overlay { opacity: .45; pointer-events: none; }
+
+/* ── Section ─────────────────────────────────────── */
+.section { padding: 10px 16px; }
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text-secondary);
+}
+
+.divider { height: 1px; background: var(--border); margin: 0; }
+
+/* ── Effect params ───────────────────────────────── */
+.effect-params { display: flex; flex-direction: column; gap: 8px; }
+
+.param-row {
+  display: grid;
+  grid-template-columns: 72px 1fr 62px;
+  align-items: center;
+  gap: 8px;
+}
+
+.param-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.param-value {
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  text-align: right;
+  font-weight: 500;
+}
+
+/* ── Slider ──────────────────────────────────────── */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  outline: none;
+  cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px var(--accent), 0 1px 3px rgba(0,0,0,.15);
+  transition: box-shadow .1s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 3px var(--accent-light), 0 1px 3px rgba(0,0,0,.15);
+}
+
+/* ── EQ ──────────────────────────────────────────── */
+.eq-container { display: flex; flex-direction: column; gap: 6px; }
+
+.eq-bands {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+  align-items: end;
+  height: 80px;
+}
+
+.eq-band-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+}
+
+.eq-band-wrapper input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 20px;
+  height: 72px;
+  padding: 0;
+  margin: 0 auto;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+}
+
+.eq-band-wrapper input[type="range"]::-webkit-slider-runnable-track {
+  width: 4px;
+  background: var(--border);
+  border-radius: 2px;
+}
+
+.eq-band-wrapper input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 6px;
+  border-radius: 3px;
+  background: var(--accent);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  margin-left: -6px;
+}
+
+.eq-labels {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 4px;
+}
+
+.eq-labels span {
+  text-align: center;
+  font-size: 10px;
+  color: var(--text-secondary);
+}
+
+/* ── Preset buttons ──────────────────────────────── */
+.preset-section {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: background .12s, border-color .12s;
+  border: none;
+  text-align: center;
+}
+
+.btn svg { width: 13px; height: 13px; }
+
+.btn-outline {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-outline:hover { background: var(--accent-light); border-color: var(--accent); color: var(--accent); }
+
+.btn-icon { flex: none; width: 32px; padding: 0; justify-content: center; }
+
+/* ── Warning ─────────────────────────────────────── */
+.warning {
+  padding: 12px 16px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.hidden { display: none; }
+
+/* ── Collapsed effect content ────────────────────── */
+[id$="-content"] { transition: opacity .15s; }
+[id$="-content"].collapsed { display: none; }

@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "Auris - EQ, Comp & Noise Gate",
+  "version": "1.0.2",
+  "description": "Real-time audio processing: EQ, compressor, limiter, noise gate, and volume control",
+  "permissions": ["storage", "tabCapture", "tabs", "offscreen"],
+  "host_permissions": ["<all_urls>"],
+  "icons": {
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "Auris",
+    "default_icon": {
+      "16": "icons/16.png",
+      "48": "icons/48.png",
+      "128": "icons/128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["worklets/noise-gate-processor.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}
